@@ -16,7 +16,7 @@
                     </div>
                     <div class="form-group">
                         <label for="email">邮箱: </label>
-                        <input type="text" name="email" class="form-control" value="{{ old('email') }}">
+                        <input type="text" name="email" class="form-control" value="{{ old('email.blade.php') }}">
                     </div>
                     <div class="form-group">
                         <label for="password">密码: </label>
