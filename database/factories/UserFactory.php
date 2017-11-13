@@ -19,7 +19,7 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
 
     return [
         'name' => $faker->name,
-        'email.blade.php' => $faker->safeEmail,
+        'email' => $faker->safeEmail,
         'is_admin' => false,
         'activated' => true,
         'password' => $password ?: $password = bcrypt('secret'),

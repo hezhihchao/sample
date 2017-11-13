@@ -29,7 +29,7 @@ class SessionsController extends Controller
     public function store(Request $request)
     {
         $credentials = $this->validate($request,[
-            'email.blade.php' => 'required|email.blade.php|max:255',
+            'email' => 'required|email|max:255',
             'password' => 'required'
         ]);
 

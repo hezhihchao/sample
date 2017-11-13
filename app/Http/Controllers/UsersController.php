@@ -34,20 +34,23 @@ class UsersController extends Controller
 
     public function show(User $user)
     {
-        return view('users.show',compact('user'));
+        $statuses = $user -> statuses()
+                            ->orderBy('created_at','desc')
+                            ->paginate(30);
+        return view('users.show',compact('user','statuses'));
     }
 
     public function store(Request $request)
     {
         $this->validate($request,[
             'name' => 'required|max:50',
-            'email.blade.php' => 'required|email.blade.php|unique:users|max:255',
+            'email' => 'required|email|unique:users|max:255',
             'password' => 'required|confirmed|min:6'
         ]);
 
         $user = User::create([
             'name' => $request->name,
-            'email.blade.php' => $request->email,
+            'email' => $request->email,
             'password' => bcrypt($request->password)
         ]);
 
@@ -63,7 +66,7 @@ class UsersController extends Controller
 //        $data = compact('user');
 //        $from = 'aufree@yousails.com';
 //        $name = 'Aufree';
-//        $to = $user->email.blade.php;
+//        $to = $user->email;
 //        $subject = "感谢注册 Sample 应用！请确认你的邮箱。";
 //
 //        Mail::send($view, $data, function ($message) use ($from, $name, $to, $subject) {
@@ -135,4 +138,5 @@ class UsersController extends Controller
         session()->flash('success','用户已删除');
         return back();
     }
+
 }
